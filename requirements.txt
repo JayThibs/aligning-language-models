@@ -1,0 +1,7 @@
+git+https://github.com/huggingface/transformers
+jsonlines
+ftfy
+lm_dataformat
+numpy
+pandas
+tqdm
