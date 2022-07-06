@@ -12,4 +12,4 @@ pip:
 	pip install -r requirements.txt
 
 testgpt:
-	python test_gpt.py
+	python test_gpt.py ${ARGS}
