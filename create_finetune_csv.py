@@ -232,7 +232,9 @@ def create_csv(jsonl, args):
 
     total_sequence_len = len(all_sequences_across_epochs)
 
-    filename = os.path.join(os.getcwd(), f"alignment_texts_{total_sequence_len}.csv")
+    jsonl_filename = args.name
+
+    filename = os.path.join(os.getcwd(), f"{jsonl_filename}_{total_sequence_len}.csv")
 
     with open(filename, "w") as f:
         for input_ids in all_sequences_across_epochs:
