@@ -1,0 +1,11 @@
+conda:
+	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+	bash Miniconda3-latest-Linux-x86_64.sh
+	echo "Close the window for Conda to work!"
+
+conda-env:
+	conda create --name llm-env python=3.7
+	echo "RUN: conda activate llm-env"
+
+pip:
+	pip install -r requirements.txt
