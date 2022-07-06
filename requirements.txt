@@ -5,3 +5,4 @@ lm_dataformat
 numpy
 pandas
 tqdm
+gdown
