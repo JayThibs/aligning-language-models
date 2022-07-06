@@ -8,4 +8,8 @@ conda-env:
 	echo "RUN: conda activate llm-env"
 
 pip:
+	pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
 	pip install -r requirements.txt
+
+testgpt:
+	python test_gpt.py
