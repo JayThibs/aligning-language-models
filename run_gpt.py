@@ -29,10 +29,11 @@ def choose_from_top(probs, n=1):
     token_id = ind[choice][0]
     return int(token_id)
 
-def test_gpt(text="Today is a nice day"):
+def test_gpt():
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument("--text", type=str, default=text)
+    argparser.add_argument("--text", type=str, default="Today is a nice day")
+    argparser.add_argument("--txt_path", type=str)
     argparser.add_argument("--num_return_sequences", type=int, default=1)
     argparser.add_argument("--gpu", type=bool, default=False)
 
@@ -44,18 +45,22 @@ def test_gpt(text="Today is a nice day"):
 
     print(f"Using device: {device}.")
 
+    if args.txt_path:
+        with open(args.txt_path, "r") as f:
+            args.text = f.read()
+
     gpt2 = AutoModelForCausalLM.from_pretrained("gpt2", return_dict_in_generate=True)
     gpt2 = gpt2.to(device)
     tokenizer = AutoTokenizer.from_pretrained("gpt2")
 
-    input_ids = tokenizer(text, return_tensors="pt").input_ids
+    input_ids = tokenizer(args.text, return_tensors="pt").input_ids
 
     start = time()
-    generated_text = generate(text, gpt2, tokenizer, device, n=args.num_return_sequences)
+    generated_text = generate(args.text, gpt2, tokenizer, device, n=args.num_return_sequences)
     end = time()
     print("Time it took to generate tokens:", end - start)
 
     print("Generated completion: \n")
-    print(generated_text)
+    print(".".join(generated_text.split(".")[0:-2]) + ".")
 
 test_gpt()
