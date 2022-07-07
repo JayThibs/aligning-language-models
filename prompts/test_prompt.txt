@@ -1,0 +1,3 @@
+Question: If it's possible to build an AI as capable as a human in all ways that matter, why would it be possible to align such an AI?
+
+Answer:
