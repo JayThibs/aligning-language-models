@@ -4,6 +4,7 @@ from transformers import AutoTokenizer
 from time import time
 import argparse
 import numpy as np
+import pandas as pd
 
 
 def generate(input_str, model, tokenizer, device, length=50, n=1):
@@ -38,6 +39,7 @@ def test_gpt():
     argparser.add_argument("--num_return_sequences", type=int, default=1)
     argparser.add_argument("--gpu", type=bool, default=False)
     argparser.add_argument("--with_log_probs", type=bool, default=False)
+    argparser.add_argument("--max_length", type=int, default=50)
 
     args = argparser.parse_args()
     if args.gpu:
@@ -51,20 +53,25 @@ def test_gpt():
         with open(args.txt_path, "r") as f:
             args.text = f.read()
 
+
     gpt2 = AutoModelForCausalLM.from_pretrained("gpt2", return_dict_in_generate=True)
-    gpt2 = gpt2.to(device)
     tokenizer = AutoTokenizer.from_pretrained("gpt2")
-    input_ids = tokenizer("Today is a nice day", return_tensors="pt").input_ids
+    input_ids = tokenizer(args.text, return_tensors="pt").input_ids
+    length = args.max_length + len(input_ids[0])
 
     start = time()
-    generated_outputs = gpt2.generate(args.text, do_sample=True, num_return_sequences=args.num_return_sequences, output_scores=True, device=device)
+    generated_outputs = gpt2.generate(input_ids, do_sample=True, max_length=length, num_return_sequences=args.num_return_sequences, output_scores=True, device=device)
     end = time()
     print("Time it took to generate tokens:", end - start)
 
     print("Generated completion(s): \n")
-    for i, sequence, score in enumerate(zip(generated_outputs.sequences, generated_outputs.scores)):
+    for i, (sequence, score) in enumerate(zip(generated_outputs.sequences, generated_outputs.scores)):
+        if args.with_log_probs:
+            token_list = []
+            for token in sequence:
+                token_list.append(tokenizer.decode(token))
         generated_text = tokenizer.decode(sequence)
-        print(f"{i+1}. {generated_text}")
+        print(f"Generation {i+1}. {generated_text}")
         # print(".".join(generated_text.split(".")[0:-2]) + ".")
 
         if args.with_log_probs:
@@ -73,6 +80,9 @@ def test_gpt():
             gen_sequences = generated_outputs.sequences[:, input_ids.shape[-1]:]
             print("\nHere are the log probabilities of the generated tokens:")
             all_log_probs = torch.stack(generated_outputs.scores, dim=1)
-            log_probs = torch.gather(all_log_probs, 2, gen_sequences[:, :, None]).squeeze(-1)
+            log_probs = list(torch.gather(all_log_probs, 2, gen_sequences[:, :, None]).squeeze(-1)[0].numpy())
+            token_with_log_probs = [token_list[len(input_ids[0]):], log_probs]
+            df = pd.DataFrame(token_with_log_probs).T
+            print(df)
 
 test_gpt()
