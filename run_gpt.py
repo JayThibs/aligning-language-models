@@ -43,8 +43,10 @@ def test_gpt():
 
     args = argparser.parse_args()
     if args.gpu:
+        device_str = "GPU"
         device = torch.device("cuda")
     else:
+        device_str = "CPU"
         device = torch.device("cpu")
 
     print(f"Using device: {device}.")
@@ -62,10 +64,12 @@ def test_gpt():
     start = time()
     generated_outputs = gpt2.generate(input_ids, do_sample=True, max_length=length, num_return_sequences=args.num_return_sequences, output_scores=True, device=device)
     end = time()
-    print("Time it took to generate tokens:", end - start)
+    print("-----------------------------------------------------")
+    print(f"Generated {args.num_return_sequences} sequences in {end-start:.2f} seconds with a {device_str}.")
+    print("-----------------------------------------------------")
 
-    print("Generated completion(s): \n")
-    for i, (sequence, score) in enumerate(zip(generated_outputs.sequences, generated_outputs.scores)):
+    print("~~~ Generated completion(s): ~~~ \n")
+    for i, sequence in enumerate(generated_outputs.sequences):
         if args.with_log_probs:
             token_list = []
             for token in sequence:
@@ -75,14 +79,14 @@ def test_gpt():
         # print(".".join(generated_text.split(".")[0:-2]) + ".")
 
         if args.with_log_probs:
-            # only use id's that were generated
-            # gen_sequences has shape [3, 15]
             gen_sequences = generated_outputs.sequences[:, input_ids.shape[-1]:]
+            # print(gen_sequences)
+            # print(gen_sequences[i])
             print("----------------------------------------------------")
             print("Here are the log probabilities of the generated tokens:")
             all_log_probs = torch.stack(generated_outputs.scores, dim=1)
-            log_probs = list(torch.gather(all_log_probs, 2, gen_sequences[:, :, None]).squeeze(-1)[0].numpy())
-            token_with_log_probs = [token_list[len(input_ids[0]):], log_probs]
+            log_probs = torch.gather(all_log_probs, 2, gen_sequences[:, :, None]).squeeze(-1)[i]
+            token_with_log_probs = [token_list[len(input_ids[0]):], log_probs.numpy()]
             df = pd.DataFrame(token_with_log_probs).T
             print(df)
 
