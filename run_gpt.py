@@ -78,7 +78,8 @@ def test_gpt():
             # only use id's that were generated
             # gen_sequences has shape [3, 15]
             gen_sequences = generated_outputs.sequences[:, input_ids.shape[-1]:]
-            print("\nHere are the log probabilities of the generated tokens:")
+            print("----------------------------------------------------")
+            print("Here are the log probabilities of the generated tokens:")
             all_log_probs = torch.stack(generated_outputs.scores, dim=1)
             log_probs = list(torch.gather(all_log_probs, 2, gen_sequences[:, :, None]).squeeze(-1)[0].numpy())
             token_with_log_probs = [token_list[len(input_ids[0]):], log_probs]
