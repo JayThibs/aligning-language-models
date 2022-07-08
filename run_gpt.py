@@ -89,5 +89,6 @@ def test_gpt():
             token_with_log_probs = [token_list[len(input_ids[0]):], log_probs.numpy()]
             df = pd.DataFrame(token_with_log_probs).T
             print(df)
+            print("----------------------------------------------------")
 
 test_gpt()
