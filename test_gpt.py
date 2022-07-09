@@ -23,7 +23,8 @@ def test_gpt(
         device_str = "CPU"
         device = torch.device("cpu")
 
-    print(f"Using device: {device}.")
+    if not time_test:
+        print(f"Using device: {device}.")
 
     if txt_path:
         with open(txt_path, "r") as f:
@@ -43,16 +44,18 @@ def test_gpt(
         num_return_sequences=num_return_sequences,
         output_scores=True,
         device=device,
+        pad_token_id=tokenizer.eos_token_id,
     )
     end = time()
+
+    if time_test:
+        return end - start
+
     print("-----------------------------------------------------")
     print(
         f"Generated {num_return_sequences} sequences in {end-start:.2f} seconds with a {device_str}."
     )
     print("-----------------------------------------------------")
-
-    if time_test:
-        return end - start
 
     if not no_outputs:
         print("~~~ Generated completion(s): ~~~ \n")
