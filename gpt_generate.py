@@ -5,7 +5,7 @@ from time import time
 import pandas as pd
 
 
-def test_gpt(
+def gpt_generate(
     text="Hello, world!",
     txt_path=None,
     num_return_sequences=1,

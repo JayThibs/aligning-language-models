@@ -1,4 +1,4 @@
-from test_gpt import test_gpt
+from gpt_generate import gpt_generate
 import argparse
 
 if __name__ == "__main__":
@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     args = argparser.parse_args()
 
-    test_gpt(
+    gpt_generate(
         text=args.text,
         txt_path=args.txt_path,
         num_return_sequences=args.num_return_sequences,
