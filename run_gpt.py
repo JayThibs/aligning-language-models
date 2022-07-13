@@ -5,6 +5,7 @@ if __name__ == "__main__":
     argparser = argparse.ArgumentParser()
     argparser.add_argument("--text", type=str, default="Today is a nice day")
     argparser.add_argument("--txt_path", type=str)
+    argparser.add_argument("--stop_token", type=str, default="\n")
     argparser.add_argument("--num_return_sequences", type=int, default=1)
     argparser.add_argument("--gpu", type=bool, default=False)
     argparser.add_argument("--with_log_probs", type=bool, default=False)
