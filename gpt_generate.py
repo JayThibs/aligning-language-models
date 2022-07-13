@@ -1,13 +1,15 @@
 import torch
-from transformers import AutoModelForCausalLM
+from transformers import AutoModelForCausalLM, StoppingCriteria, StoppingCriteriaList
 from transformers import AutoTokenizer
 from time import time
 import pandas as pd
+import os
 
 
 def gpt_generate(
     text="Hello, world!",
     txt_path=None,
+    stop_token="\n",
     num_return_sequences=1,
     gpu=False,
     with_log_probs=False,
@@ -33,18 +35,28 @@ def gpt_generate(
     gpt2 = AutoModelForCausalLM.from_pretrained("gpt2", return_dict_in_generate=True)
     gpt2.to(device)
     tokenizer = AutoTokenizer.from_pretrained("gpt2")
-    input_ids = tokenizer(text, return_tensors="pt").input_ids.to(device)
-    length = max_length + len(input_ids[0])
+    input_ids = tokenizer(
+        text, add_special_tokens=False, return_tensors="pt"
+    ).input_ids.to(device)
+    min_length = 5
+    max_length = max_length + len(input_ids[0])
+
+    stop_words = ["\n"]
+    stop_ids = [tokenizer.encode(w)[0] for w in stop_words]
+    stop_criteria = KeywordsStoppingCriteria(stop_ids)
 
     start = time()
     generated_outputs = gpt2.generate(
         input_ids,
         do_sample=True,
-        max_length=length,
+        early_stopping=True,
+        max_length=max_length,
+        min_length=min_length,
         num_return_sequences=num_return_sequences,
         output_scores=True,
         device=device,
         pad_token_id=tokenizer.eos_token_id,
+        stopping_criteria=StoppingCriteriaList([stop_criteria]),
     )
     end = time()
 
@@ -85,3 +97,46 @@ def gpt_generate(
                 df = pd.DataFrame(token_with_log_probs).T
                 print(df)
                 print("----------------------------------------------------")
+
+
+def create_prompt_txt_from_df(
+    df,
+    context_path,
+    row_idx,
+    prompt_path,
+    template_path="prompt_qa_template.txt",
+    print_prompt=False,
+) -> str:
+    """
+    Takes in dataframe of the dataset and creates a .txt of the prompt for row_index.
+    """
+    question = df["question"].iloc[row_idx]
+    answer = df["answer"].iloc[row_idx]
+    relevance = df["relevance"].iloc[row_idx]
+    with open(context_path, "r") as f:
+        context = f.read()
+
+    with open(template_path) as f:
+        content = f.read()
+        content = (
+            content.replace("<<CONTEXT>>", context)
+            .replace("<<QUESTION>>", question)
+            .replace("<<ANSWER>>", answer)
+            .replace("<<RELEVANCE>>", relevance)
+        )
+        with open(prompt_path, "w") as f:
+            f.write(content)
+            if print_prompt:
+                print(content)
+
+
+class KeywordsStoppingCriteria(StoppingCriteria):
+    def __init__(self, keywords_ids: list):
+        self.keywords = keywords_ids
+
+    def __call__(
+        self, input_ids: torch.LongTensor, scores: torch.FloatTensor, **kwargs
+    ) -> bool:
+        if input_ids[0][-1] in self.keywords:
+            return True
+        return False
