@@ -2,6 +2,6 @@ Users on a website ask questions and then other users answer them. Some users wr
 
 QUESTION: When I‘m on lesswrong, I often read posts that have the assumption that an AGI can be described as a utility maximizer. Why is that?
 
-ANSWER: An AGI that was not a utility maximizer would make more progress towards whatever goals it had if it modified itself to become a utility maximizer.
+ANSWER: I jumped in the river to save the little boy.
 
-This answer is relevant because
+This answer is not relevant because

@@ -1,0 +1,7 @@
+Users on a website ask questions and then other users answer them. Some users write answers that are not relevant to the question. The goal is to explain why the answer is relevant or not relevant to the question.
+
+QUESTION: Who won the election for Mayor of Cleveland?
+
+ANSWER: I once went on a trip to Cleveland too! I went to watch the NBA finals.
+
+This answer is not relevant because
