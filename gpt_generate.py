@@ -105,10 +105,10 @@ def gpt_generate(
 
 def create_prompt_txt_from_df(
     df,
-    context_path,
-    task_description_path,
     row_idx,
     prompt_path,
+    context_path="prompts/contexts/users_on_website.txt",
+    task_description_path="prompts/task_description/task_description_1.txt",
     template_path="prompt_qa_template.txt",
     print_prompt=False,
 ) -> str:
@@ -149,3 +149,13 @@ class KeywordsStoppingCriteria(StoppingCriteria):
         if input_ids[0][-1] in self.keywords:
             return True
         return False
+
+
+def print_ground_truth_from_df(df, row_idx, prompt_path):
+    create_prompt_txt_from_df(df, row_idx, prompt_path)
+    with open(prompt_path, "r") as f:
+        prompt = f.read()
+    prompt_with_explanation = prompt + " " + df["explanation"].iloc[row_idx]
+    with open(prompt_path, "w") as f:
+        f.write(prompt_with_explanation)
+    print(prompt_with_explanation)
