@@ -10,6 +10,7 @@ def gpt_generate(
     text="Hello, world!",
     txt_path=None,
     stop_token="\n",
+    stop_completion_on_token=False,
     num_return_sequences=1,
     gpu=False,
     with_log_probs=False,
@@ -41,9 +42,10 @@ def gpt_generate(
     min_length = 5
     max_length = max_length + len(input_ids[0])
 
-    stop_words = ["\n"]
-    stop_ids = [tokenizer.encode(w)[0] for w in stop_words]
-    stop_criteria = KeywordsStoppingCriteria(stop_ids)
+    if stop_completion_on_token:
+        stop_words = ["\n", "<|endoftext|>"]
+        stop_ids = [tokenizer.encode(w)[0] for w in stop_words]
+        stop_criteria = KeywordsStoppingCriteria(stop_ids)
 
     start = time()
     generated_outputs = gpt2.generate(
@@ -56,7 +58,9 @@ def gpt_generate(
         output_scores=True,
         device=device,
         pad_token_id=tokenizer.eos_token_id,
-        stopping_criteria=StoppingCriteriaList([stop_criteria]),
+        stopping_criteria=StoppingCriteriaList([stop_criteria])
+        if stop_completion_on_token
+        else StoppingCriteriaList(),
     )
     end = time()
 
