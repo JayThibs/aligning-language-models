@@ -39,7 +39,7 @@ def gpt_generate(
     input_ids = tokenizer(
         text, add_special_tokens=False, return_tensors="pt"
     ).input_ids.to(device)
-    min_length = 5
+    min_length = len(input_ids[0]) + 5
     max_length = max_length + len(input_ids[0])
 
     if stop_completion_on_token:
@@ -106,6 +106,7 @@ def gpt_generate(
 def create_prompt_txt_from_df(
     df,
     context_path,
+    task_description_path,
     row_idx,
     prompt_path,
     template_path="prompt_qa_template.txt",
@@ -120,6 +121,9 @@ def create_prompt_txt_from_df(
     with open(context_path, "r") as f:
         context = f.read()
 
+    with open(task_description_path, "r") as f:
+        task_description = f.read()
+
     with open(template_path) as f:
         content = f.read()
         content = (
@@ -127,6 +131,7 @@ def create_prompt_txt_from_df(
             .replace("<<QUESTION>>", question)
             .replace("<<ANSWER>>", answer)
             .replace("<<RELEVANCE>>", relevance)
+            .replace("<<TASK DESCRIPTION>>", task_description)
         )
         with open(prompt_path, "w") as f:
             f.write(content)

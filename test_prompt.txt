@@ -4,4 +4,6 @@ QUESTION: When I‘m on lesswrong, I often read posts that have the assumption t
 
 ANSWER: An AGI that was not a utility maximizer would make more progress towards whatever goals it had if it modified itself to become a utility maximizer.
 
+Below contains an explanantion of why the answer above is or isn't relevant to the question:
+
 This answer is relevant because
