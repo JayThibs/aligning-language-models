@@ -6,4 +6,4 @@ ANSWER: Because we're building the AI from the ground up and can change what the
 
 Below contains an explanation of why the answer above is or isn't relevant to the question:
 
-This answer is relevant because
+EXPLANATION: This answer is relevant to the question because

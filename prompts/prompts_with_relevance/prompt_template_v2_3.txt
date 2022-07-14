@@ -12,4 +12,4 @@ ANSWER: This is an excellent question. I'd say the main reason is that all of th
 
 Below contains an explanation of why the answer above is or isn't relevant to the question:
 
-This answer is relevant because
+EXPLANATION: This answer is relevant to the question because

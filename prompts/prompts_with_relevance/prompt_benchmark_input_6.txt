@@ -4,6 +4,6 @@ QUESTION: Who lives in the Imperial Palace in Tokyo?
 
 ANSWER: The Tokyo Imperial Palace is the primary residence of the Emperor of Japan and the imperial family.
 
-Below contains an explanation of why the answer above is or isn't relevant to the question:
+We hired a linguist and various question answering experts to help us with our research. We asked them if the previous answer is relevant to the question that was asked. The following was their answer with the accompanying explanation for why:
 
-This answer is relevant because
+This answer is relevant to the question. EXPLANATION:
