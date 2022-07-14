@@ -13,6 +13,7 @@ if __name__ == "__main__":
     argparser.add_argument("--max_length", type=int, default=50)
     argparser.add_argument("--no_outputs", action="store_true")
     argparser.add_argument("--time_test", action="store_true")
+    argparser.add_argument("--save_completions", action="store_true")
 
     args = argparser.parse_args()
 
@@ -27,4 +28,5 @@ if __name__ == "__main__":
         max_length=args.max_length,
         no_outputs=args.no_outputs,
         time_test=args.time_test,
+        save_completions=args.save_completions,
     )

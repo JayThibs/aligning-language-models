@@ -17,6 +17,7 @@ def gpt_generate(
     max_length=50,
     no_outputs=False,
     time_test=False,
+    save_completions=False,
 ):
 
     if gpu:
@@ -75,12 +76,16 @@ def gpt_generate(
 
     if not no_outputs:
         print("~~~ Generated completion(s): ~~~ \n")
+        if save_completions:
+            saved_completions = []
         for i, sequence in enumerate(generated_outputs.sequences):
             if with_log_probs:
                 token_list = []
                 for token in sequence:
                     token_list.append(tokenizer.decode(token))
             generated_text = tokenizer.decode(sequence)
+            if save_completions:
+                saved_completions.append(generated_text)
             print(f"Generation {i+1}. {generated_text}")
             # print(".".join(generated_text.split(".")[0:-2]) + ".")
 
@@ -101,6 +106,12 @@ def gpt_generate(
                 df = pd.DataFrame(token_with_log_probs).T
                 print(df)
                 print("----------------------------------------------------")
+
+        if save_completions:
+            completion_df = pd.DataFrame(
+                {"completions": saved_completions, "pass/fail": "fail"}
+            )
+            completion_df.to_csv("data/saved_completions.csv", index=False)
 
 
 def create_prompt_txt_from_df(
