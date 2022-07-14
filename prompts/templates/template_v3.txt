@@ -4,4 +4,4 @@ QUESTION: <<QUESTION>>
 
 ANSWER: <<ANSWER>>
 <<TASK DESCRIPTION>>
-This answer is <<RELEVANCE>> to the question. Explanation: <<EXPLANATION>>
+This answer is <<RELEVANCE>> to the question. Explanation:

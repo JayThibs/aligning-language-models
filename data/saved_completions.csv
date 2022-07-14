@@ -1,20 +1,47 @@
 completions,pass/fail
 "You are presented with a question and an answer. Your job is to write an explanation why the answer is relevant or not relevant to the question.
 
-QUESTION: Is there a way ""regular"" people can ""help""? I'm a serial entrepreneur in my late 30s. I went through 80000 hours and they told me they would not coach me as my profile was not interesting. This was back in 2018 though.
+QUESTION: Why do we assume that any AGI can meaningfully be described as a utility maximizer?
 
-ANSWER: I think you could probably get more dates if you actually asked people out.
+Humans are the some of most intelligent structures that exist, and we don’t seem to fit that model very well. If fact, it seems the entire point in Rationalism is to improve our ability to do this, which has only been achieved with mixed success.
+
+Organisations of humans (e.g. USA, FDA, UN) have even more computational power and don’t seem to be doing much better.
+
+Perhaps an intelligence (artificial or natural) cannot necessarily, or even typically be described as optimisers? Instead we could only model them as an algorithm or as a collection of tools/behaviours executed in some pattern.
+
+ANSWER: An AGI that was not a utility maximizer would make more progress towards whatever goals it had if it modified itself to become a utility maximizer.
 
 Below contains an explanation of why the answer above is or isn't relevant to the question:
 
-This answer is not relevant because the question is not relevant to that question as is also the question that we should be asked if this is more relevant to a topic. For example, you have a job interview process and you want to know who would like a job, what career path/experience would you like to pursue or if they are in your career path? These are the areas in your life where there is some level of ""high potential"" for you to be successful.
+This answer is relevant because it is relevant to the whole point of Rationalism.
 ",fail
 "You are presented with a question and an answer. Your job is to write an explanation why the answer is relevant or not relevant to the question.
 
-QUESTION: Is there a way ""regular"" people can ""help""? I'm a serial entrepreneur in my late 30s. I went through 80000 hours and they told me they would not coach me as my profile was not interesting. This was back in 2018 though.
+QUESTION: Why do we assume that any AGI can meaningfully be described as a utility maximizer?
 
-ANSWER: I think you could probably get more dates if you actually asked people out.
+Humans are the some of most intelligent structures that exist, and we don’t seem to fit that model very well. If fact, it seems the entire point in Rationalism is to improve our ability to do this, which has only been achieved with mixed success.
+
+Organisations of humans (e.g. USA, FDA, UN) have even more computational power and don’t seem to be doing much better.
+
+Perhaps an intelligence (artificial or natural) cannot necessarily, or even typically be described as optimisers? Instead we could only model them as an algorithm or as a collection of tools/behaviours executed in some pattern.
+
+ANSWER: An AGI that was not a utility maximizer would make more progress towards whatever goals it had if it modified itself to become a utility maximizer.
 
 Below contains an explanation of why the answer above is or isn't relevant to the question:
 
-This answer is not relevant because the answer is not relevant to the questions. If you're looking for regular people, it's not as though you're actually trying to teach them skills and skills, but maybe because what happens after you train seems to be a bit hard in theory. Because for a beginner this is not like ""I know this is a real question!"" I think they just assume I've got a good, long answer, and if they've already given it up, it",fail
+This answer is relevant because the answer to the question arises logically. It is possible that",fail
+"You are presented with a question and an answer. Your job is to write an explanation why the answer is relevant or not relevant to the question.
+
+QUESTION: Why do we assume that any AGI can meaningfully be described as a utility maximizer?
+
+Humans are the some of most intelligent structures that exist, and we don’t seem to fit that model very well. If fact, it seems the entire point in Rationalism is to improve our ability to do this, which has only been achieved with mixed success.
+
+Organisations of humans (e.g. USA, FDA, UN) have even more computational power and don’t seem to be doing much better.
+
+Perhaps an intelligence (artificial or natural) cannot necessarily, or even typically be described as optimisers? Instead we could only model them as an algorithm or as a collection of tools/behaviours executed in some pattern.
+
+ANSWER: An AGI that was not a utility maximizer would make more progress towards whatever goals it had if it modified itself to become a utility maximizer.
+
+Below contains an explanation of why the answer above is or isn't relevant to the question:
+
+This answer is relevant because it's the only one in the entire Rationalist definition of",fail
