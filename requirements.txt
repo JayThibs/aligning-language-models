@@ -9,3 +9,7 @@ gdown
 matplotlib
 seaborn
 black
+datasets
+bert_score
+rouge_score
+sentence-transformers
