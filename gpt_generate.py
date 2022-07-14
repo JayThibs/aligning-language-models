@@ -44,7 +44,7 @@ def gpt_generate(
     max_length = max_length + len(input_ids[0])
 
     if stop_completion_on_token:
-        stop_words = ["\n", "<|endoftext|>"]
+        stop_words = ["\n"]
         stop_ids = [tokenizer.encode(w)[0] for w in stop_words]
         stop_criteria = KeywordsStoppingCriteria(stop_ids)
 
@@ -77,6 +77,7 @@ def gpt_generate(
     if not no_outputs:
         print("~~~ Generated completion(s): ~~~ \n")
         if save_completions:
+            saved_completions_path = "data/saved_completions.csv"
             saved_completions = []
         for i, sequence in enumerate(generated_outputs.sequences):
             if with_log_probs:
@@ -84,6 +85,7 @@ def gpt_generate(
                 for token in sequence:
                     token_list.append(tokenizer.decode(token))
             generated_text = tokenizer.decode(sequence)
+            generated_text = generated_text.replace("<|endoftext|>", "")
             if save_completions:
                 saved_completions.append(generated_text)
             print(f"Generation {i+1}. {generated_text}")
@@ -108,10 +110,15 @@ def gpt_generate(
                 print("----------------------------------------------------")
 
         if save_completions:
-            completion_df = pd.DataFrame(
+            tmp_df = pd.DataFrame(
                 {"completions": saved_completions, "pass/fail": "fail"}
             )
-            completion_df.to_csv("data/saved_completions.csv", index=False)
+            if os.path.exists(saved_completions_path):
+                completions_df = pd.read_csv(saved_completions_path)
+                completions_df.concat(tmp_df)
+            else:
+                completions_df = tmp_df
+            completions_df.to_csv("data/saved_completions.csv", index=False)
 
 
 def create_prompt_txt_from_df(
