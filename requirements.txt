@@ -14,3 +14,4 @@ bert_score
 rouge_score
 sentence-transformers
 openai
+ipykernel
