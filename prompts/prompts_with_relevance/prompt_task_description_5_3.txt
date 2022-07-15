@@ -10,6 +10,8 @@ Perhaps an intelligence (artificial or natural) cannot necessarily, or even typi
 
 ANSWER: This is an excellent question. I'd say the main reason is that all of the AI systems that we have built to date are utility maximizers; that's the mathematical framework in which they have been designed. Neural nets / deep-learning work by using a simple optimizer to find the minimum of a loss function via gradient descent. Evolutionary algorithms, simulated annealing, etc. find the minimum (or maximum) of a "fitness function". We don't know of any other way to build systems that learn.
 
-We hired a linguist and various question answering experts to help us with our research. We asked them if the previous answer is relevant to the question that was asked. The following was their answer with the accompanying explanation for why:
+We hired a linguist and various question answering experts to help us with our research. We asked them if the previous answer is relevant to the question that was asked. The answer must not be too vague. The answer must contain a concise explanation that contains a precise reason why the answer is or is not relevant to the question.
 
-This answer is relevant to the question. EXPLANATION:
+The following was their answer with the accompanying explanation for why:
+
+This answer is relevant because

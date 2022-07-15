@@ -4,6 +4,6 @@ QUESTION: Who won the election for Mayor of Cleveland?
 
 ANSWER: I once went on a trip to Cleveland too! I went to watch the NBA finals.
 
-Below contains an explanantion of why the answer above is or isn't relevant to the question:
+Below contains an explanation of why the answer above is or isn't relevant to the question:
 
 This answer is not relevant because
