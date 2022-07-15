@@ -8,7 +8,8 @@ import os
 
 def gpt_generate(
     text="Hello, world!",
-    model_name="gpt2",
+    model_name="EleutherAI/gpt-j-6B",
+    temperature=0.1,
     txt_path=None,
     stop_token="\n",
     stop_completion_on_token=False,
@@ -36,9 +37,9 @@ def gpt_generate(
         with open(txt_path, "r") as f:
             text = f.read()
 
-    gpt2 = AutoModelForCausalLM.from_pretrained("gpt2", return_dict_in_generate=True)
-    gpt2.to(device)
-    tokenizer = AutoTokenizer.from_pretrained("gpt2")
+    model = AutoModelForCausalLM.from_pretrained(model_name, return_dict_in_generate=True)
+    model.to(device)
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
     input_ids = tokenizer(
         text, add_special_tokens=False, return_tensors="pt"
     ).input_ids.to(device)
@@ -51,7 +52,7 @@ def gpt_generate(
         stop_criteria = KeywordsStoppingCriteria(stop_ids)
 
     start = time()
-    generated_outputs = gpt2.generate(
+    generated_outputs = model.generate(
         input_ids,
         do_sample=True,
         early_stopping=True,
@@ -64,6 +65,7 @@ def gpt_generate(
         stopping_criteria=StoppingCriteriaList([stop_criteria])
         if stop_completion_on_token
         else StoppingCriteriaList(),
+        temperature=temperature,
     )
     end = time()
 
