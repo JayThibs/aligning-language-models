@@ -11,7 +11,7 @@ def gpt_generate(
     model_name="EleutherAI/gpt-j-6B",
     model=None,
     tokenizer=None,
-    temperature=0.1,
+    temperature=0.2,
     txt_path=None,
     stop_token="\n",
     stop_completion_on_token=False,
@@ -39,10 +39,10 @@ def gpt_generate(
         with open(txt_path, "r") as f:
             text = f.read()
 
-    if model_name is None:
-        model = AutoModelForCausalLM.from_pretrained("gpt2")
+    if model_name == "gpt2":
+        model = AutoModelForCausalLM.from_pretrained(model_name)
         model.to(device)
-    if tokenizer is None:
+    if tokenizer == model_name:
         tokenizer = AutoTokenizer.from_pretrained(model_name)
     input_ids = tokenizer(
         text, add_special_tokens=False, return_tensors="pt"
@@ -66,6 +66,7 @@ def gpt_generate(
         output_scores=True,
         return_dict_in_generate=True,
         device=device,
+        repetition_penalty=1.5,
         pad_token_id=tokenizer.eos_token_id,
         stopping_criteria=StoppingCriteriaList([stop_criteria])
         if stop_completion_on_token
