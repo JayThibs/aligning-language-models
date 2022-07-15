@@ -110,15 +110,17 @@ def gpt_generate(
                 print("----------------------------------------------------")
 
         if save_completions:
-            tmp_df = pd.DataFrame(
-                {"completions": saved_completions, "pass/fail": "fail"}
-            )
-            if os.path.exists(saved_completions_path):
-                completions_df = pd.read_csv(saved_completions_path)
-                completions_df.concat(tmp_df)
-            else:
-                completions_df = tmp_df
-            completions_df.to_csv("data/saved_completions.csv", index=False)
+            # tmp_df = pd.DataFrame(
+            #     {"completions": saved_completions, "pass/fail": "fail"}
+            # )
+            # if os.path.exists(saved_completions_path):
+            #     completions_df = pd.read_csv(saved_completions_path)
+            #     completions_df.concat(tmp_df)
+            # else:
+            #     completions_df = tmp_df
+            # completions_df.to_csv("data/saved_completions.csv", index=False)
+
+            return saved_completions
 
 
 def create_prompt_txt_from_df(
