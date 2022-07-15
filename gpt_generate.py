@@ -8,6 +8,7 @@ import os
 
 def gpt_generate(
     text="Hello, world!",
+    model_name="gpt2",
     txt_path=None,
     stop_token="\n",
     stop_completion_on_token=False,
@@ -18,6 +19,7 @@ def gpt_generate(
     no_outputs=False,
     time_test=False,
     save_completions=False,
+    only_print_completions=False,
 ):
 
     if gpu:
@@ -88,6 +90,8 @@ def gpt_generate(
             generated_text = generated_text.replace("<|endoftext|>", "")
             if save_completions:
                 saved_completions.append(generated_text)
+            if only_print_completions:
+                generated_text = " ".join(generated_text.split("relevant because")[1:])
             print(f"Generation {i+1}. {generated_text}")
             # print(".".join(generated_text.split(".")[0:-2]) + ".")
 
