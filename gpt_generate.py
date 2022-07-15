@@ -1,6 +1,6 @@
 import torch
 from transformers import AutoModelForCausalLM, StoppingCriteria, StoppingCriteriaList
-from transformers import AutoTokenizer
+from transformers import AutoTokenizer, GPTJForCausalLM
 from time import time
 import pandas as pd
 import os
@@ -9,6 +9,8 @@ import os
 def gpt_generate(
     text="Hello, world!",
     model_name="EleutherAI/gpt-j-6B",
+    model=None,
+    tokenizer=None,
     temperature=0.1,
     txt_path=None,
     stop_token="\n",
@@ -37,9 +39,11 @@ def gpt_generate(
         with open(txt_path, "r") as f:
             text = f.read()
 
-    model = AutoModelForCausalLM.from_pretrained(model_name, return_dict_in_generate=True)
-    model.to(device)
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    if model_name is None:
+        model = AutoModelForCausalLM.from_pretrained("gpt2")
+        model.to(device)
+    if tokenizer is None:
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
     input_ids = tokenizer(
         text, add_special_tokens=False, return_tensors="pt"
     ).input_ids.to(device)
@@ -60,6 +64,7 @@ def gpt_generate(
         min_length=min_length,
         num_return_sequences=num_return_sequences,
         output_scores=True,
+        return_dict_in_generate=True,
         device=device,
         pad_token_id=tokenizer.eos_token_id,
         stopping_criteria=StoppingCriteriaList([stop_criteria])
