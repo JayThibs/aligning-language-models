@@ -4,8 +4,6 @@ QUESTION: Human beings are not aligned and will possibly never be aligned withou
 
 ANSWER: When we're talking about aligning a structure, we are trying to make sure that it is leveled properly.
 
-We hired a linguist and various question answering experts to help us with our research. We asked them if the previous answer is relevant to the question that was asked. The ANSWER must not be too vague. The ANSWER must contain a concise explanation that contains a precise reason why the ANSWER is or is not relevant to the QUESTION.
-
-The following was their answer with the accompanying explanation for why:
+We hired a linguist and various question answering experts to help us with our research. We asked them if the previous answer is relevant to the question that was asked. The following was their answer with the accompanying explanation for why:
 
 EXPLANATION: This answer is not relevant to the question because
