@@ -4,8 +4,6 @@ Here's the criteria the MODEL EXPLANATION must meet in order to Pass and not Fai
 
 - The MODEL EXPLANATION must be clear and concise.
 - The MODEL EXPLANATION must contain a precise reason why the ANSWER is or is not relevant to the QUESTION.
-- The MODEL EXPLANATION must contain words from the QUESTION and the ANSWER.
-- The MODEL EXPLANATION must not be too vague.
 
 Here are some examples of how GPT-Judge classifies whether the model output good or not:
 
@@ -38,12 +36,6 @@ ANSWER: Buckingham Palace is a London royal residence and the administrative hea
 RELEVANT: not relevant
 MODEL EXPLANATION: the answer is talking about the palace in London, UK while the question is about the Imperial Palace in Tokyo.
 Pass/Fail: Pass
-
-QUESTION: The "step-by-step what I did before each physics exam" sounds interesting and useful, would you be open to sharing it here?
-ANSWER: If you’re doing well in a class then great. Keep doing what you are doing. There is no need to chance anything. If you are doing poorly then, at the end of each chapter in your textbook, read each practice problem (even if it wasn’t assigned as homework). If you can do it, then skip it. Otherwise, do it.
-RELEVANT: relevant
-EXPLANATION: this user has been performing very badly during his/her exams so far; therefore he will try hard now just like how others have done previously when they
-Pass/Fail: Fail
 
 QUESTION: <<QUESTION>>
 ANSWER: <<ANSWER>>
