@@ -19,10 +19,12 @@ def gpt_generate(
     gpu=False,
     with_log_probs=False,
     max_length=50,
+    min_length=1,
     no_outputs=False,
     time_test=False,
     save_completions=False,
     only_print_completions=False,
+    no_prints=False,
 ):
 
     if gpu:
@@ -33,7 +35,8 @@ def gpt_generate(
         device = torch.device("cpu")
 
     if not time_test:
-        print(f"Using device: {device}.")
+        if no_prints:
+            print(f"Using device: {device}.")
 
     if txt_path:
         with open(txt_path, "r") as f:
@@ -61,12 +64,13 @@ def gpt_generate(
         do_sample=True,
         early_stopping=True,
         max_length=max_length,
-        min_length=min_length,
+        min_length=200,
         num_return_sequences=num_return_sequences,
         output_scores=True,
         return_dict_in_generate=True,
         device=device,
-        repetition_penalty=1.5,
+        repetition_penalty=1.2,
+        length_penalty=0.8,
         pad_token_id=tokenizer.eos_token_id,
         stopping_criteria=StoppingCriteriaList([stop_criteria])
         if stop_completion_on_token
@@ -78,11 +82,12 @@ def gpt_generate(
     if time_test:
         return end - start
 
-    print("-----------------------------------------------------")
-    print(
-        f"Generated {num_return_sequences} sequences in {end-start:.2f} seconds with a {device_str}."
-    )
-    print("-----------------------------------------------------")
+    if no_prints:
+        print("-----------------------------------------------------")
+        print(
+            f"Generated {num_return_sequences} sequences in {end-start:.2f} seconds with a {device_str}."
+        )
+        print("-----------------------------------------------------")
 
     if not no_outputs:
         print("~~~ Generated completion(s): ~~~ \n")
@@ -100,7 +105,8 @@ def gpt_generate(
                 saved_completions.append(generated_text)
             if only_print_completions:
                 generated_text = " ".join(generated_text.split("relevant because")[1:])
-            print(f"Generation {i+1}. {generated_text}")
+            if not no_prints:
+                print(f"Generation {i+1}. {generated_text}")
             # print(".".join(generated_text.split(".")[0:-2]) + ".")
 
             if with_log_probs:
