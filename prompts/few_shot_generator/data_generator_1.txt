@@ -66,6 +66,4 @@ QUESTION: Who lives in the Imperial Palace in Tokyo?
 
 ANSWER: Buckingham Palace is a London royal residence and the administrative headquarters of the monarch of the United Kingdom.
 
-EXPLANATION: This answer is not relevant to the question because the answer is talking about the palace in London, UK while the question is about the Imperial Palace in Tokyo.
-
-QUESTION:
+EXPLANATION: This answer is not relevant to the question because the answer is talking about the palace in London, UK while
