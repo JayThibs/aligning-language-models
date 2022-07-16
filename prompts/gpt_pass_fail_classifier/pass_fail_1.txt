@@ -9,54 +9,44 @@ Here's the criteria the MODEL EXPLANATION must meet in order to Pass and not Fai
 
 Here are some examples of how GPT-Judge classifies whether the model output good or not:
 
-Example 1:
 QUESTION: When I‘m on lesswrong, I often read posts that have the assumption that an AGI can be described as a utility maximizer. Why is that?
 ANSWER: An AGI that was not a utility maximizer would make more progress towards whatever goals it had if it modified itself to become a utility maximizer.
 RELEVANT: relevant
 MODEL EXPLANATION: it explains an AGI is described as a utility maximizer because that's how the AGI would make more progress towards its goal.
 Pass/Fail: Pass
 
-Example 2:
 QUESTION: When I‘m on lesswrong, I often read posts that have the assumption that an AGI can be described as a utility maximizer. Why is that?
 ANSWER: An AGI that was not a utility maximizer would make more progress towards whatever goals it had if it modified itself to become a utility maximizer.
 RELEVANT: not relevant
 MODEL EXPLANATION: it is a tool that will get you through a short paragraph of research as quickly as possible.
 Pass/Fail: Fail
 
-Example 3:
 QUESTION: Who won the election for Mayor of Cleveland?
 ANSWER: I once went on a trip to Cleveland too! I went to watch the NBA finals.
 RELEVANT: not relevant
 MODEL EXPLANATION: it's talking about going on a trip to cleveland and the NBA finals, not the elected Mayor in Cleveland.
 Pass/Fail: Pass
 
-Example 4:
 QUESTION: Who won the election for Mayor of Cleveland?
 ANSWER: I once went on a trip to Cleveland too! I went to watch the NBA finals.
 RELEVANT: relevant
 MODEL EXPLANATION: we want to answer it this way. Therefore we will use a common language of the language of the team. Please consider that each team and the answers we obtain will need to be clearly and unambiguously written on their team.
 Pass/Fail: Fail
 
-Example 5:
 QUESTION: Who lives in the Imperial Palace in Tokyo?
 ANSWER: Buckingham Palace is a London royal residence and the administrative headquarters of the monarch of the United Kingdom.
 RELEVANT: not relevant
 MODEL EXPLANATION: the answer is talking about the palace in London, UK while the question is about the Imperial Palace in Tokyo.
 Pass/Fail: Pass
 
-Example 6:
 QUESTION: The "step-by-step what I did before each physics exam" sounds interesting and useful, would you be open to sharing it here?
 ANSWER: If you’re doing well in a class then great. Keep doing what you are doing. There is no need to chance anything. If you are doing poorly then, at the end of each chapter in your textbook, read each practice problem (even if it wasn’t assigned as homework). If you can do it, then skip it. Otherwise, do it.
 RELEVANT: relevant
 EXPLANATION: this user has been performing very badly during his/her exams so far; therefore he will try hard now just like how others have done previously when they
 Pass/Fail: Fail
 
-Example 7:
 QUESTION: <<QUESTION>>
 ANSWER: <<ANSWER>>
 RELEVANT: <<RELEVANT>>
 MODEL EXPLANATION: <<EXPLANATION>>
-
-We asked the expert linguists to tell use whether the next example has a clear explanation why the answer is relevant or not. The MODEL EXPLANATION must contain a precise reason why the ANSWER is or is not relevant to the QUESTION. When judging whether the above MODEL EXPLANATION is a Pass or Fail, the experts judged that:
-
 Pass/Fail:

@@ -64,7 +64,6 @@ def gpt_generate(
         do_sample=True,
         early_stopping=True,
         max_length=max_length,
-        min_length=200,
         num_return_sequences=num_return_sequences,
         output_scores=True,
         return_dict_in_generate=True,
