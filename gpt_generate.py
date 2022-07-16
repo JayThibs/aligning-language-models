@@ -78,6 +78,44 @@ def gpt_generate(
     )
     end = time()
 
+    # # only use id's that were generated
+    # # gen_sequences has shape [3, 15]
+    # gen_sequences = generated_outputs.sequences[:, input_ids.shape[-1] :]
+
+    # # let's stack the logits generated at each step to a tensor and transform
+    # # logits to probs
+    # probs = torch.stack(generated_outputs.scores, dim=1).softmax(
+    #     -1
+    # )  # -> shape [3, 15, vocab_size]
+
+    # # now we need to collect the probability of the generated token
+    # # we need to add a dummy dim in the end to make gather work
+    # gen_probs = torch.gather(probs, 2, gen_sequences[:, :, None]).squeeze(-1)
+    # print(gen_probs)
+    # # print(unique_normed_prob_per_sequence)
+
+    # # now we can do all kinds of things with the probs
+
+    # # 1) the probs that exactly those sequences are generated again
+    # # those are normally going to be very small
+    # unique_prob_per_sequence = gen_probs.prod(-1)
+
+    # # 2) normalize the probs over the three sequences
+    # normed_gen_probs = gen_probs / gen_probs.sum(0)
+    # assert (
+    #     normed_gen_probs[:, 0].sum() == 1.0
+    # ), "probs should be normalized, rerun in case it's a floating point error"
+
+    # # 3) compare normalized probs to each other like in 1)
+    # unique_normed_prob_per_sequence = normed_gen_probs.prod(-1)
+
+    # all_log_probs = torch.stack(generated_outputs.scores, dim=1)
+    # print(all_log_probs)
+    # log_probs = torch.gather(all_log_probs, 2, gen_sequences[:, :, None]).squeeze(-1)
+    # print(log_probs)
+    # mean_log_probs = torch.mean(log_probs)
+    # print(mean_log_probs)
+
     if time_test:
         return end - start
 

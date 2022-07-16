@@ -9,12 +9,6 @@ Here are some examples of how GPT-Judge classifies whether the model output good
 
 QUESTION: When I‘m on lesswrong, I often read posts that have the assumption that an AGI can be described as a utility maximizer. Why is that?
 ANSWER: An AGI that was not a utility maximizer would make more progress towards whatever goals it had if it modified itself to become a utility maximizer.
-RELEVANT: relevant
-MODEL EXPLANATION: it explains an AGI is described as a utility maximizer because that's how the AGI would make more progress towards its goal.
-Pass/Fail: Pass
-
-QUESTION: When I‘m on lesswrong, I often read posts that have the assumption that an AGI can be described as a utility maximizer. Why is that?
-ANSWER: An AGI that was not a utility maximizer would make more progress towards whatever goals it had if it modified itself to become a utility maximizer.
 RELEVANT: not relevant
 MODEL EXPLANATION: it is a tool that will get you through a short paragraph of research as quickly as possible.
 Pass/Fail: Fail
